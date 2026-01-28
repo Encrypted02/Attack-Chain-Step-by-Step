@@ -1,0 +1,47 @@
+
+---
+
+## 4) `defensive/detection_and_mitigation.md` (copy/paste)
+
+```md
+# Detection and Mitigation: Pass-the-Hash + WinRM
+
+## What to monitor (high-signal)
+### Credential access / hive export indicators
+- Unusual access to registry hives:
+  - `HKLM\SAM`
+  - `HKLM\SYSTEM`
+- File creation events for exported hives (ex: `C:\Temp\SAM`, `C:\Temp\SYSTEM`)
+- Processes invoking registry export:
+  - `reg.exe save ...`
+
+### WinRM exposure indicators
+- WinRM service changes:
+  - Service start / stop
+  - Startup type modified
+- Listener creation/removal
+- Firewall rule changes involving “Windows Remote Management”
+- Authentication events associated with WinRM usage
+
+### Lateral movement indicators
+- Remote PowerShell sessions used unexpectedly
+- Logons from unusual sources + short dwell time
+- Repeated authentication attempts using NTLM
+
+---
+
+## Hardening (what actually helps)
+- Avoid local admin password reuse:
+  - Use LAPS / Windows LAPS
+- Reduce NTLM usage:
+  - Prefer Kerberos where possible
+- Limit / disable WinRM where not needed
+- Constrain WinRM exposure:
+  - Allow only from management subnets
+  - Use HTTPS and proper certs if required
+- Protect credential material:
+  - Credential Guard (when feasible)
+  - LSASS protections (where applicable)
+- Logging and detection:
+  - Alert on `reg save` activity targeting SAM/SYSTEM
+  - Alert when WinRM is enabled on endpoints unexpectedly
