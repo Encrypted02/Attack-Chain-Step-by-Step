@@ -1,0 +1,2 @@
+cd /mnt/c/Temp
+impacket-secretsdump -sam SAM -system SYSTEM LOCAL
