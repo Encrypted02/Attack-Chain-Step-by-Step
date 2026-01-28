@@ -1,0 +1,3 @@
+Stop-Service WinRM
+Set-Service WinRM -StartupType Disabled
+Disable-NetFirewallRule -DisplayGroup "Windows Remote Management
