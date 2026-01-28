@@ -1,0 +1,6 @@
+whoami
+hostname
+whoami /groups
+echo "Access confirmed (lab)" > C:\Temp\redteam_proof.txt
+type C:\Temp\redteam_proof.txt
+del C:\Temp\redteam_proof.txt
